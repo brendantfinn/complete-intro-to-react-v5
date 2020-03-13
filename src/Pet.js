@@ -8,8 +8,8 @@ export default function Pet({ name, animal, breed }) {
   // ]);
 
   // ALL JSX is transpiled into React.createElement like above
-  return (
-    <div>
+      return (
+  <div>
       <h1>{name}</h1>
       <h2>{animal}</h2>
       <h3>{breed}</h3>
