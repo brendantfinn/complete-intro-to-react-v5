@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { ANIMALS } from "@frontendmasters/pet";
+import useDropdown from "./useDropdown";
 
 const SearchParams = () => {
   // const location = "Seattle, WA";
   const [location, setLocation] = useState("Seattle, WA");
-  const [animal, setAnimal] = useState("Dog");
-  const [breed, setBreed] = useState("");
-  const [breeds, setBreeds] = useState("");
+  const [breeds, setBreeds] = useState([]);
+  const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
+  const [breed, BreedDropdown] = useDropdown("Breed", "", breeds);
   //useState("Seattle, WA" is the default state)
   //ALL HOOKS BEGIN WITH "USE" - Hooks bring stateful logic
   //  [location, setLocation] - UseState always gives back an [Array] we should be destructuring.
@@ -31,7 +32,9 @@ const SearchParams = () => {
           />
           {/* with out an useState/onChange you can't update the value of location input - when it rerenders the location is always the variable of location - 2way binding isn't "free" */}
         </label>
-        <label htmlFor="animal">
+
+        <AnimalDropdown />
+        {/* <label htmlFor="animal">
           Animal
           <select
             id="animal"
@@ -46,7 +49,26 @@ const SearchParams = () => {
               </option>
             ))}
           </select>
-        </label>
+        </label> */}
+
+        <BreedDropdown />
+        {/* <label htmlFor="breed">
+          Breed
+          <select
+            id="breed"
+            value={breed}
+            onChange={e => setBreed(e.target.value)}
+            onBlur={e => setBreed(e.target.value)}
+            disabled={!breeds.length}
+          >
+            <option>All</option>
+            {breeds.map(breedString => (
+              <option key={breedString} value={breedString}>
+                {breedString}
+              </option>
+            ))}
+          </select>
+        </label> */}
 
         <button>Submit</button>
       </form>
